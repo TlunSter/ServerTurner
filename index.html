@@ -14,28 +14,23 @@
     <p id="status"></p>
 
     <script>
-    function sendCommand(command) {
-        console.log(`Sending command: ${command}`);
-        fetch('http://192.168.100.2:5000/update_status', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ command: command }),
-        })
-        .then(response => {
-            console.log('Response received:', response);
-            return response.text();
-        })
-        .then(data => {
-            console.log('Data received:', data);
-            document.getElementById('status').innerText = data;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-</script>
-
+        function sendCommand(command) {
+            fetch('https://4bfe-178-143-40-151.ngrok-free.app', {  <!-- Replace with your actual ngrok URL -->
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ command: command }),
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('status').innerText = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
 </body>
 </html>
+
